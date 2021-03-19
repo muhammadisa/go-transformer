@@ -1,8 +1,8 @@
 package transformer
 
 import (
-	"github.com/muhammadisa/go-transformer/model"
-	pb "github.com/muhammadisa/go-transformer/protobuf"
+	"github.com/muhammadisa/go-transformer/example/model"
+	pb "github.com/muhammadisa/go-transformer/example/protobuf"
 	uuid "github.com/satori/go.uuid"
 	"github.com/stretchr/testify/suite"
 	"testing"
