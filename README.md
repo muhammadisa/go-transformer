@@ -1,12 +1,13 @@
-<h1 align="center">Welcome to Epict 👋</h1>
+<h1 align="center">Welcome to go transformer 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.2-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <img alt="documentation: yes" src="https://img.shields.io/badge/Documentation-Yes-green.svg" />
   <img alt="maintained: yes" src="https://img.shields.io/badge/Maintained-Yes-green.svg" />
 </p>
+
+![go transformer](coverage_badge.png)
 
 > Bidirectional conversion from protocol buffer stub to struct or otherwise
 
