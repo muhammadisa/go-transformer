@@ -8,8 +8,6 @@
   <img alt="maintained: yes" src="https://travis-ci.com/muhammadisa/go-transformer.svg?branch=main" />
 </p>
 
-![go transformer](coverage_badge.png)
-
 > Bidirectional conversion from protocol buffer stub to struct or otherwise
 
 ![go transformer](img.png)
