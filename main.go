@@ -8,8 +8,8 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-func main() {
-	person := model.Todo{
+func sampleStructToProtoc() *pb.Todo {
+	todoStruct := model.Todo{
 		ID:            uuid.NewV4().String(),
 		Name:          "Isa",
 		Completed:     false,
@@ -18,13 +18,40 @@ func main() {
 	}
 	codes := []model.Code{{1}, {4}, {9}}
 
-	pPerson := pb.Todo{}
+	todoProtocBlank := &pb.Todo{}
 
-	for _, i := range codes {
-		var localPbCode pb.Code
-		transformer.Transformed{From: &i}.TransformerToProto(&localPbCode)
-		pPerson.Codes = append(pPerson.Codes, &localPbCode)
+	transformer.Transformed{From: &todoStruct}.ToProtoc(todoProtocBlank)
+	fmt.Println("todoProtocBlank", todoProtocBlank)
+	fmt.Println("todoProtocBlank.Codes", todoProtocBlank.Codes)
+
+	for _, c := range codes {
+		todoCodeProtocBlank := &pb.Code{}
+		transformer.Transformed{From: &c}.ToProtoc(todoCodeProtocBlank)
+		todoProtocBlank.Codes = append(todoProtocBlank.Codes, todoCodeProtocBlank)
 	}
-	transformer.Transformed{From: &person}.TransformerToProto(&pPerson)
-	fmt.Println(&pPerson)
+	fmt.Println("todoProtocBlank", todoProtocBlank)
+	fmt.Println("todoProtocBlank.Codes", todoProtocBlank.Codes)
+
+	return todoProtocBlank
+}
+
+func sampleProtocToStruct(todoProtoc *pb.Todo) {
+	todo := model.Todo{}
+
+	transformer.Transformed{From: todoProtoc}.ToStruct(&todo)
+	fmt.Println("todoStruct", todo)
+	fmt.Println("todoStruct.Codes", todo.Codes)
+
+	for _, i := range todoProtoc.Codes {
+		var code model.Code
+		transformer.Transformed{From: i}.ToStruct(&code)
+		todo.Codes = append(todo.Codes, code)
+	}
+	fmt.Println("todoStruct", todo)
+	fmt.Println("todoStruct.Codes", todo.Codes)
+}
+
+func main() {
+	todoProtoc := sampleStructToProtoc()
+	sampleProtocToStruct(todoProtoc)
 }

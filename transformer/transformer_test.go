@@ -3,7 +3,6 @@ package transformer
 import (
 	"github.com/muhammadisa/go-transformer/example/model"
 	pb "github.com/muhammadisa/go-transformer/example/protobuf"
-	uuid "github.com/satori/go.uuid"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
@@ -27,9 +26,12 @@ func (suite *TransformerTestSuite) TestAutoConf() {
 		}
 
 		pPerson := pb.Todo{}
-		autoConf(&pPerson, todoCopyExample)
-
-		suite.T().Log(&pPerson)
+		autoAppliedCopies(&pPerson, todoCopyExample)
+		suite.Assert().Equal(pPerson.Id, todoCopyExample["Id"][1])
+		suite.Assert().Equal(pPerson.Name, todoCopyExample["Name"][1])
+		suite.Assert().Equal(pPerson.Completed, todoCopyExample["Completed"][1])
+		suite.Assert().Equal(pPerson.NumberCode, todoCopyExample["NumberCode"][1])
+		suite.Assert().Equal(pPerson.NumberProduct, todoCopyExample["NumberProduct"][1])
 	})
 }
 
@@ -44,7 +46,7 @@ func (suite *TransformerTestSuite) TestAutoConfBool() {
 			"Content": {"bool", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -60,7 +62,7 @@ func (suite *TransformerTestSuite) TestAutoConfString() {
 			"Content": {"string", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -76,7 +78,7 @@ func (suite *TransformerTestSuite) TestAutoConfByte() {
 			"Content": {"byte", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -92,7 +94,7 @@ func (suite *TransformerTestSuite) TestAutoConfFloat32() {
 			"Content": {"float32", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -108,7 +110,7 @@ func (suite *TransformerTestSuite) TestAutoConfFloat64() {
 			"Content": {"float64", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -124,7 +126,7 @@ func (suite *TransformerTestSuite) TestAutoConfInt() {
 			"Content": {"int", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -140,7 +142,7 @@ func (suite *TransformerTestSuite) TestAutoConfInt8() {
 			"Content": {"int8", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -156,7 +158,7 @@ func (suite *TransformerTestSuite) TestAutoConfInt16() {
 			"Content": {"int16", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -172,7 +174,7 @@ func (suite *TransformerTestSuite) TestAutoConfInt32() {
 			"Content": {"int32", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -188,7 +190,7 @@ func (suite *TransformerTestSuite) TestAutoConfInt64() {
 			"Content": {"int64", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -204,7 +206,7 @@ func (suite *TransformerTestSuite) TestAutoConfUint() {
 			"Content": {"uint", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -220,7 +222,7 @@ func (suite *TransformerTestSuite) TestAutoConfUint8() {
 			"Content": {"uint8", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -236,7 +238,7 @@ func (suite *TransformerTestSuite) TestAutoConfUint16() {
 			"Content": {"uint16", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -252,7 +254,7 @@ func (suite *TransformerTestSuite) TestAutoConfUint32() {
 			"Content": {"uint32", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -268,7 +270,7 @@ func (suite *TransformerTestSuite) TestAutoConfUint64() {
 			"Content": {"uint64", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
@@ -284,36 +286,64 @@ func (suite *TransformerTestSuite) TestAutoConfUintprt() {
 			"Content": {"uintptr", data},
 		}
 		t := DummyStruct{}
-		autoConf(&t, todoCopyExample)
+		autoAppliedCopies(&t, todoCopyExample)
 		suite.Assert().Equal(t.Content, data)
 	})
 }
 
+func (suite *TransformerTestSuite) TestTransformerToStruct() {
+	suite.Run("ToStruct", func() {
+		pTodo := &pb.Todo{
+			Id:            "5b9e1416-1f06-4a61-a30a-0dcff164639b",
+			Name:          "Mark Zuck",
+			Completed:     false,
+			NumberCode:    129520,
+			NumberProduct: 25983578228,
+		}
+		pCodes := []*pb.Code{{Id: 1}, {Id: 4}, {Id: 9}}
+
+		todo := model.Todo{}
+
+		for _, i := range pCodes {
+			var localCode model.Code
+			Transformed{From: i}.ToStruct(&localCode)
+			todo.Codes = append(todo.Codes, localCode)
+		}
+
+		Transformed{From: pTodo}.ToStruct(&todo)
+
+		suite.Assert().Len(todo.Codes, 3)
+		suite.Assert().Equal(todo.ID, "5b9e1416-1f06-4a61-a30a-0dcff164639b")
+		suite.Assert().Equal(todo.Name, "Mark Zuck")
+		suite.Assert().Equal(todo.NumberCode, int32(129520))
+		suite.Assert().Equal(todo.NumberProduct, uint64(25983578228))
+	})
+}
+
 func (suite *TransformerTestSuite) TestTransformerToProto() {
-	suite.Run("TransformerToProto", func() {
-		uid := uuid.NewV4().String()
-		person := model.Todo{
-			ID:            uid,
-			Name:          "Isa",
+	suite.Run("ToProtoc", func() {
+		todo := model.Todo{
+			ID:            "5b9e1416-1f06-4a61-a30a-0dcff164639b",
+			Name:          "Mark Zuck",
 			Completed:     false,
 			NumberCode:    129520,
 			NumberProduct: 25983578228,
 		}
 		codes := []model.Code{{1}, {4}, {9}}
 
-		pPerson := pb.Todo{}
+		pTodo := pb.Todo{}
 
 		for _, i := range codes {
 			var localPbCode pb.Code
-			Transformed{From: &i}.TransformerToProto(&localPbCode)
-			pPerson.Codes = append(pPerson.Codes, &localPbCode)
+			Transformed{From: &i}.ToProtoc(&localPbCode)
+			pTodo.Codes = append(pTodo.Codes, &localPbCode)
 		}
-		Transformed{From: &person}.TransformerToProto(&pPerson)
+		Transformed{From: &todo}.ToProtoc(&pTodo)
 
-		suite.Assert().Len(pPerson.Codes, 3)
-		suite.Assert().Equal(pPerson.Id, uid)
-		suite.Assert().Equal(pPerson.Name, "Isa")
-		suite.Assert().Equal(pPerson.NumberCode, int32(129520))
-		suite.Assert().Equal(pPerson.NumberProduct, uint64(25983578228))
+		suite.Assert().Len(pTodo.Codes, 3)
+		suite.Assert().Equal(pTodo.Id, "5b9e1416-1f06-4a61-a30a-0dcff164639b")
+		suite.Assert().Equal(pTodo.Name, "Mark Zuck")
+		suite.Assert().Equal(pTodo.NumberCode, int32(129520))
+		suite.Assert().Equal(pTodo.NumberProduct, uint64(25983578228))
 	})
 }
