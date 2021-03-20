@@ -5,12 +5,11 @@ import (
 	"github.com/muhammadisa/go-transformer/example/model"
 	pb "github.com/muhammadisa/go-transformer/example/protobuf"
 	"github.com/muhammadisa/go-transformer/transformer"
-	uuid "github.com/satori/go.uuid"
 )
 
 func sampleStructToProtoc() *pb.Todo {
 	todoStruct := model.Todo{
-		ID:            uuid.NewV4().String(),
+		ID:            "5b9e1416-1f06-4a61-a30a-0dcff164639b",
 		Name:          "Isa",
 		Completed:     false,
 		NumberCode:    129520,
