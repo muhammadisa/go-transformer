@@ -317,7 +317,6 @@ func (suite *TransformerTestSuite) TestTransformerToStruct() {
 		suite.Assert().Equal(todo.Name, "Mark Zuck")
 		suite.Assert().Equal(todo.NumberCode, int32(129520))
 		suite.Assert().Equal(todo.NumberProduct, uint64(25983578228))
-		panic("TEST ERROR")
 	})
 }
 
