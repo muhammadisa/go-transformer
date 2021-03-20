@@ -5,6 +5,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
   <img alt="maintained: yes" src="https://img.shields.io/badge/Maintained-Yes-green.svg" />
+  <img alt="maintained: yes" src="https://travis-ci.com/muhammadisa/go-transformer.svg?branch=main" />
 </p>
 
 ![go transformer](coverage_badge.png)
