@@ -1,10 +1,11 @@
 package transformer
 
 import (
+	"testing"
+
 	"github.com/muhammadisa/go-transformer/example/model"
 	pb "github.com/muhammadisa/go-transformer/example/protobuf"
 	"github.com/stretchr/testify/suite"
-	"testing"
 )
 
 type TransformerTestSuite struct {
@@ -292,7 +293,7 @@ func (suite *TransformerTestSuite) TestAutoConfUintprt() {
 }
 
 func (suite *TransformerTestSuite) TestTransformerToStruct() {
-	suite.Run("ToStruct", func() {
+	suite.Run("Protoc to Struct", func() {
 		pTodo := &pb.Todo{
 			Id:            "5b9e1416-1f06-4a61-a30a-0dcff164639b",
 			Name:          "Mark Zuck",
@@ -306,11 +307,11 @@ func (suite *TransformerTestSuite) TestTransformerToStruct() {
 
 		for _, i := range pCodes {
 			var localCode model.Code
-			Transformed{From: i}.ToStruct(&localCode)
+			Protoc(i).Struct(&localCode)
 			todo.Codes = append(todo.Codes, localCode)
 		}
 
-		Transformed{From: pTodo}.ToStruct(&todo)
+		Protoc(pTodo).Struct(&todo)
 
 		suite.Assert().Len(todo.Codes, 3)
 		suite.Assert().Equal(todo.ID, "5b9e1416-1f06-4a61-a30a-0dcff164639b")
@@ -321,7 +322,7 @@ func (suite *TransformerTestSuite) TestTransformerToStruct() {
 }
 
 func (suite *TransformerTestSuite) TestTransformerToProto() {
-	suite.Run("ToProtoc", func() {
+	suite.Run("Struct to Protoc", func() {
 		todo := model.Todo{
 			ID:            "5b9e1416-1f06-4a61-a30a-0dcff164639b",
 			Name:          "Mark Zuck",
@@ -335,10 +336,10 @@ func (suite *TransformerTestSuite) TestTransformerToProto() {
 
 		for _, i := range codes {
 			var localPbCode pb.Code
-			Transformed{From: &i}.ToProtoc(&localPbCode)
+			Struct(&i).Protoc(&localPbCode)
 			pTodo.Codes = append(pTodo.Codes, &localPbCode)
 		}
-		Transformed{From: &todo}.ToProtoc(&pTodo)
+		Struct(&todo).Protoc(&pTodo)
 
 		suite.Assert().Len(pTodo.Codes, 3)
 		suite.Assert().Equal(pTodo.Id, "5b9e1416-1f06-4a61-a30a-0dcff164639b")
