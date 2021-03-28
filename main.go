@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/muhammadisa/go-transformer/example/model"
 	pb "github.com/muhammadisa/go-transformer/example/protobuf"
 	"github.com/muhammadisa/go-transformer/transformer"
@@ -19,13 +20,13 @@ func sampleStructToProtoc() *pb.Todo {
 
 	todoProtocBlank := &pb.Todo{}
 
-	transformer.Transformed{From: &todoStruct}.ToProtoc(todoProtocBlank)
+	transformer.Struct(&todoStruct).Protoc(todoProtocBlank)
 	fmt.Println("todoProtocBlank", todoProtocBlank)
 	fmt.Println("todoProtocBlank.Codes", todoProtocBlank.Codes)
 
 	for _, c := range codes {
 		todoCodeProtocBlank := &pb.Code{}
-		transformer.Transformed{From: &c}.ToProtoc(todoCodeProtocBlank)
+		transformer.Struct(&c).Protoc(todoCodeProtocBlank)
 		todoProtocBlank.Codes = append(todoProtocBlank.Codes, todoCodeProtocBlank)
 	}
 	fmt.Println("todoProtocBlank", todoProtocBlank)
@@ -37,13 +38,13 @@ func sampleStructToProtoc() *pb.Todo {
 func sampleProtocToStruct(todoProtoc *pb.Todo) {
 	todo := model.Todo{}
 
-	transformer.Transformed{From: todoProtoc}.ToStruct(&todo)
+	transformer.Protoc(todoProtoc).Struct(&todo)
 	fmt.Println("todoStruct", todo)
 	fmt.Println("todoStruct.Codes", todo.Codes)
 
 	for _, i := range todoProtoc.Codes {
 		var code model.Code
-		transformer.Transformed{From: i}.ToStruct(&code)
+		transformer.Protoc(i).Struct(&code)
 		todo.Codes = append(todo.Codes, code)
 	}
 	fmt.Println("todoStruct", todo)

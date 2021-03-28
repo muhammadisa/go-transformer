@@ -95,12 +95,12 @@ func conversionStructToProtoc() *pb.Person {
     personPb := &pb.Person{}
     
     // Transforming person struct into person pb using transformer
-    transformer.Transformed{From: &person}.ToProtoc(personPb)
+    transformer.Struct(&person).Protoc(personPb)
     
     // Transforming person addresses struct into addresses pb using transformer
     for _, address := range personAddresses {
         addressPb := &pb.Address{}
-        transformer.Transformed{From: &address}.ToProtoc(addressPb)
+        transformer.Struct(&address).Protoc(addressPb)
         personPb.Addresses = append(personPb.Addresses, addressPb)
     }
     
@@ -118,12 +118,12 @@ func conversionProtocToStruct(personPb *pb.Person) Person {
     person := Person{}
     
     // Transforming person pb into struct using transformer
-    transformer.Transformed{From: personPb}.ToStruct(&person)
+    transformer.Protoc(personPb).Struct(&person)
     
     // Transforming person addresses pb into addresses struct using transformer
     for _, addressPb := range personPb.Addresses {
         var address Address
-        transformer.Transformed{From: addressPb}.ToStruct(&address)
+        transformer.Protoc(addressPb).Struct(&address)
         person.Addresses = append(person.Addresses, address)
     }
     
