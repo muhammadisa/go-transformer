@@ -13,12 +13,6 @@ const (
 	arrIndexType = 0
 )
 
-// ITransformed functionality contracts
-type ITransformed interface {
-	ToStruct(to interface{})
-	ToProtoc(to interface{})
-}
-
 type Transformed struct {
 	From interface{}
 }
